@@ -1,0 +1,80 @@
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+public class DeleteHttp {
+
+	private String urlstr = "/ocall/callremoveHandler.jsp";
+	private String poststr = "reqid=";
+	
+	private String host_ = "172.30.100.84";
+	private int port_ = 8155;
+	
+	
+	
+	public DeleteHttp() {
+		// TODO Auto-generated constructor stub
+
+		
+	}
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+				
+
+		DeleteHttp workerObject = new DeleteHttp();		
+		System.out.println(workerObject.callRemove("1487656817487"));
+		
+	}
+	
+	
+	  public String callRemove(String reqID)
+      {
+      // call status url
+     //String urlstr = "/ocall/callremoveHandler.jsp";
+
+      // setting the http post string
+     // String poststr = "reqid=";
+      poststr += URLEncoder.encode(reqID);
+
+      // Send Call remove post
+      String result = postToGateway(urlstr, poststr);
+      return result;
+      
+      }
+	
+	private String postToGateway(String urlstr, String poststr)
+	 {
+		 try {
+			 URL url = new URL("http", "172.30.100.84", 8155, urlstr);
+			 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+			 conn.setDoInput(true);
+			 conn.setDoOutput(true);
+			 conn.setRequestMethod("POST");
+			 
+			 PrintWriter out = new PrintWriter(conn.getOutputStream());
+			 out.print(poststr);
+			 out.close();
+
+			 InputStream in = conn.getInputStream();
+
+			 StringBuffer rcstr = new StringBuffer();
+			 byte[] b = new byte[4096];
+			 int len;
+			 while ((len = in.read(b)) != -1)
+				 rcstr.append(new String(b, 0, len));
+			 return rcstr.toString();
+		 }
+		 catch (Exception e) {
+			 e.printStackTrace();
+			 return "";
+		 }
+	 }
+
+}

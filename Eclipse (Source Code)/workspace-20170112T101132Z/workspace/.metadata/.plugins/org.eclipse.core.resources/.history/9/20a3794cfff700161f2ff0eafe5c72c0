@@ -1,0 +1,70 @@
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+
+public class DeleteHttp {
+
+	
+	private String host_;
+	private int port_;
+	private String urlstr;
+	
+	public DeleteHttp() {
+		// TODO Auto-generated constructor stub
+		
+	/*
+		host_ = "172.30.100.84";
+		 port_ = 8155;
+		 urlstr = "/ocall/callremoveHandler.jsp?reqid=all&cc_card_id";
+	*/
+		
+	}
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+
+		DeleteHttp workerObject = new DeleteHttp();
+		
+		
+		//String rcstr = 
+		String result = workerObject.postToGateway("/ocall/callremoveHandler.jsp?reqid=all", "");
+
+		System.out.println(result);
+		
+	}
+	
+	private String postToGateway(String urlstr, String poststr)
+	 {
+		 try {
+			 URL url = new URL("http", "172.30.100.84", 8155, "");
+			 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+			 conn.setDoInput(true);
+			 conn.setDoOutput(true);
+			 conn.setRequestMethod("POST");
+			 
+			 PrintWriter out = new PrintWriter(conn.getOutputStream());
+			 out.print(poststr);
+			 out.close();
+
+			 InputStream in = conn.getInputStream();
+
+			 StringBuffer rcstr = new StringBuffer();
+			 byte[] b = new byte[4096];
+			 int len;
+			 while ((len = in.read(b)) != -1)
+				 rcstr.append(new String(b, 0, len));
+			 return rcstr.toString();
+		 }
+		 catch (Exception e) {
+			 e.printStackTrace();
+			 return "";
+		 }
+	 }
+
+}

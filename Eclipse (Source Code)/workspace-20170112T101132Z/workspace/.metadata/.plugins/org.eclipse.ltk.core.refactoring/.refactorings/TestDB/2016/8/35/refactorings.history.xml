@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;HttpClient.java&apos; to &apos;TestDB/src/voicent.Ivr&apos;&#x0D;&#x0A;- Original project: &apos;TestDB&apos;&#x0D;&#x0A;- Destination element: &apos;TestDB/src/voicent.Ivr&apos;&#x0D;&#x0A;- Original element: &apos;HttpClient.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;voicent.Ivr" element1="/src&lt;{HttpClient.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1471765046834" units="1" version="1.0"/>
+</session>
